@@ -1,22 +1,21 @@
 import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
-import React, { useReducer } from 'react';
+import React from 'react';
 import { Faixas } from '@/constants/constants';
 import { useRouter } from 'expo-router';
 
 export default function FaixasComponent() {
-      const router = useRouter();
+  const router = useRouter();
 
   return (
-    <View className="mx-4 mt-4">
-      <Text className="text-3xl">
-        Faixas
-        </Text>
+    <View style={{ marginHorizontal: 16, marginTop: 16 }}>
+      <Text style={{ fontSize: 24, fontWeight: 'bold'  }}>Faixas</Text>
 
-        <FlatList
+      <FlatList
         data={Faixas}
         keyExtractor={item => item.name}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: "80%", paddingTop: "4%" }}
+        numColumns={2}
+        contentContainerStyle={{ paddingBottom: 80, paddingTop: 16, paddingHorizontal: 8 }}
         renderItem={({ item, index }) => <FaixasCard router={router} index={index} item={item} />}
       />
     </View>
@@ -25,7 +24,7 @@ export default function FaixasComponent() {
 
 const FaixasCard = ({ item, router, index }) => {
   return (
-    <View style={{ width: '50%', height: '80%' }}>
+    <View style={{ width: '50%', padding: 8 }}>
       <TouchableOpacity
         onPress={() => {
           switch (item.name) {
@@ -38,30 +37,27 @@ const FaixasCard = ({ item, router, index }) => {
             case 'Roxa':
               router.push('/azulroxascreen');
               break;
-              case 'Marrom':
-                router.push('/marrompretascreen');
-                break;
-              case 'Preta':
-                router.push('/marrompretascreen');
-                break;
-                case 'Nogi':
-                  router.push('/nogiscreen');
-                  break;
+            case 'Marrom':
+              router.push('/marrompretascreen');
+              break;
+            case 'Preta':
+              router.push('/marrompretascreen');
+              break;
+            case 'Nogi':
+              router.push('/nogiscreen');
+              break;
             default:
               break;
           }
         }}
-        className="flex justify-between p-2 mb-1"
+        style={{ flex: 1, justifyContent: 'space-between', padding: 8, marginBottom: 8 }}
       >
         <Image
           source={item.image}
           resizeMode="cover"
-          style={{ width: '100%', height: '125%' }}
-          className="rounded-[15px]"
+          style={{ width: '100%', height: 90, borderRadius: 15 }}
         />
       </TouchableOpacity>
     </View>
   );
 };
-
-
